@@ -10,7 +10,7 @@ const configs = [{
 
 export async function GET() {
 
-    let responseMessage: string = process.env.TEST_1;
+    let responseMessage: string | undefined = process.env.TEST_1;
 
     for (const config of configs) {
         responseMessage += `Results for ${config.id}:\n\n`
