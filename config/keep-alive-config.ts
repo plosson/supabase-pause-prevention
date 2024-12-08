@@ -1,6 +1,5 @@
 export type KeepAliveConfig = typeof keepAliveConfig
 
-
 export const keepAliveConfig = {
 
   // Select a table in your Supabase database to make a call to
@@ -21,3 +20,5 @@ export const keepAliveConfig = {
     'https://your-other-supabase-app.com/api/keep-alive',
   ]
 }
+
+export const keepAliveConfigs = [];
