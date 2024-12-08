@@ -48,6 +48,13 @@ const fetchOtherEndpoints = async (): Promise<string[]> => {
     return []
 }
 
+const configs = [{
+    id: "jesuispal-api",
+    disableRandomStringQuery: true,
+    allowInsertionAndDeletion: true,
+}]
+
+
 export async function _GET() {
 
     const supabase = createClient()  // maybe switch to ClientSide Client
@@ -69,11 +76,6 @@ export async function _GET() {
         responseMessage += insertOrDeleteResults.message + '\n\n'
     }
 
-    if (config?.otherEndpoints != null && config?.otherEndpoints.length > 0) {
-        const fetchResults: string[] = await fetchOtherEndpoints()
-        responseMessage += `\n\nOther Endpoint Results:\n${fetchResults.join('\n')}`
-    }
-
     return new Response(responseMessage, {
         status: (successfulResponses == true) ? 200 : 400
     })
@@ -81,7 +83,13 @@ export async function _GET() {
 
 export async function GET() {
 
-    return new Response("Hello World", {
+    let responseMessage: string = ''
+
+    for (const config of configs) {
+        responseMessage += `Results for ${config.id}:\n\n`
+    }
+
+    return new Response(responseMessage, {
         status: 200
     })
 }
